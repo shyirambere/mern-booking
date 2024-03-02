@@ -7,10 +7,13 @@ import {
 import LayoutPages from "./layouts/LayoutPages";
 import Register from "./pages/Register";
 import SignIn from "./pages/SignIn";
+import AddHotel from "./pages/AddHotel";
+import { useAppContext } from "./contexts/AppContext";
 //import Header from "./components/Header";
 //import AuthCallbackPage from "./pages/AuthCallbackPage";
 
 const App = () => {
+  const { isLoggedIn } = useAppContext();
   return (
     <Router>
       <Routes>
@@ -36,6 +39,18 @@ const App = () => {
             </LayoutPages>
           }
         />
+        {isLoggedIn && (
+          <>
+            <Route
+              path="/add-hotel"
+              element={
+                <LayoutPages>
+                  <AddHotel />
+                </LayoutPages>
+              }
+            ></Route>
+          </>
+        )}
         <Route path="*" element={<Navigate to={"/"} />} />
       </Routes>
     </Router>
